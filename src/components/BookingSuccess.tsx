@@ -69,12 +69,12 @@ export function BookingSuccess({
           <span className="text-miso-secondary">Thời gian hát:</span>
           <span className="font-semibold text-miso-dark">{hours} giờ</span>
         </div>
-        <div className="flex justify-between">
-          <span className="text-miso-secondary">Photobooth:</span>
-          <span className="font-semibold text-miso-dark">
-            {includeBooth ? 'Có (Chụp 2 tặng 1)' : 'Không'}
-          </span>
-        </div>
+        {includeBooth && (
+          <div className="flex justify-between">
+            <span className="text-miso-secondary">Photobooth:</span>
+            <span className="font-semibold text-miso-dark">Có (Chụp 2 tặng 1)</span>
+          </div>
+        )}
         {note && (
           <div className="flex justify-between pt-1 border-t border-miso-light/40">
             <span className="text-miso-secondary">Ghi chú:</span>

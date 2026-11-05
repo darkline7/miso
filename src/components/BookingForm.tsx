@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Sparkles, Users, Minus, Plus, Info, Camera } from 'lucide-react';
+import { Sparkles, Users, Minus, Plus, Info } from 'lucide-react';
 
 export interface BookingFormProps {
   fullName: string;
@@ -16,8 +16,8 @@ export interface BookingFormProps {
   setGuests: (v: number) => void;
   hours: number;
   setHours: (v: number) => void;
-  includeBooth: boolean;
-  setIncludeBooth: (v: boolean) => void;
+  includeBooth?: boolean;
+  setIncludeBooth?: (v: boolean) => void;
   note?: string;
   setNote?: (v: string) => void;
   onSubmit: (e: React.FormEvent) => void;
@@ -188,24 +188,6 @@ export function BookingForm(props: BookingFormProps) {
             </button>
           ))}
         </div>
-      </div>
-
-      {/* Dịch vụ Photobooth kèm theo */}
-      <div className="p-3 bg-rose-50/70 border border-rose-200/80 rounded-2xl">
-        <label className="flex items-center gap-2.5 text-xs font-medium text-miso-dark cursor-pointer select-none">
-          <input
-            type="checkbox"
-            checked={props.includeBooth}
-            onChange={(e) => props.setIncludeBooth(e.target.checked)}
-            className="w-4 h-4 rounded text-miso-primary focus:ring-miso-primary cursor-pointer"
-          />
-          <div className="flex items-center gap-1.5 flex-1">
-            <Camera className="w-4 h-4 text-rose-500 shrink-0" />
-            <span className="font-semibold text-rose-950">
-              Kèm chụp ảnh Photobooth (Chụp 2 tặng 1)
-            </span>
-          </div>
-        </label>
       </div>
 
       {/* Ghi chú thêm */}

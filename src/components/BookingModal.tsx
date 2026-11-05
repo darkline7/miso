@@ -29,7 +29,6 @@ export function BookingModal({
   const [time, setTime] = useState('18:00');
   const [guests, setGuests] = useState(initialGuests || 4);
   const [hours, setHours] = useState(initialHours);
-  const [includeBooth, setIncludeBooth] = useState(true);
   const [note, setNote] = useState('');
 
   useEffect(() => {
@@ -82,7 +81,7 @@ export function BookingModal({
                 Đặt Slot Trực Tuyến
               </span>
               <h3 className="font-serif text-2xl font-bold text-miso-dark mt-1">
-                Đặt Slot Hát & Photobooth
+                Đặt Slot Phòng Hát
               </h3>
               <p className="text-xs text-miso-dark/70 mt-1">
                 Giữ chỗ không cần cọc • Quán tự động sắp xếp căn phòng phù hợp theo số người.
@@ -102,8 +101,6 @@ export function BookingModal({
               setGuests={setGuests}
               hours={hours}
               setHours={setHours}
-              includeBooth={includeBooth}
-              setIncludeBooth={setIncludeBooth}
               note={note}
               setNote={setNote}
               onSubmit={handleSubmit}
@@ -118,7 +115,6 @@ export function BookingModal({
             time={time}
             guests={guests}
             hours={hours}
-            includeBooth={includeBooth}
             note={note}
             onClose={handleReset}
           />
