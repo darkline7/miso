@@ -15,6 +15,8 @@ import {
   Film,
 } from 'lucide-react';
 
+import { CashReconcileCalculator } from './CashReconcileCalculator';
+
 interface PhotoboothShiftViewProps {
   shifts: PhotoboothShiftReport[];
 }
@@ -32,16 +34,18 @@ export function PhotoboothShiftView({ shifts: initialShifts }: PhotoboothShiftVi
   const [wastedPrints, setWastedPrints] = useState(2);
   const [cashRevenue, setCashRevenue] = useState(1280000);
   const [transferRevenue, setTransferRevenue] = useState(2450000);
-  const [initialCash, setInitialCash] = useState(500000);
-  const [handedOverCash, setHandedOverCash] = useState(1780000);
+  const [initialCash, setInitialCash] = useState(500000); // Tiền cốt đầu ca
+  const [handedOverCash, setHandedOverCash] = useState(3230000); // Tiền nhân viên giữ
   const [paperRollsRemaining, setPaperRollsRemaining] = useState(4);
   const [brokenPropsCount, setBrokenPropsCount] = useState(0);
   const [printerStatus, setPrinterStatus] = useState<'good' | 'maintenance' | 'need_ink'>('good');
   const [notes, setNotes] = useState('Máy in DNP hoạt động sắc nét, không kẹt giấy. Đạo cụ đầy đủ.');
 
   const totalCalculatedRevenue = cashRevenue + transferRevenue;
-  const expectedCash = initialCash + cashRevenue;
-  const cashDifference = handedOverCash - expectedCash;
+  // Công thức: Tiền mặt + Tiền số dư - Tiền cốt đầu ca
+  const targetStandard = cashRevenue + transferRevenue - initialCash;
+  // So sánh với Tiền nhân viên giữ xem Âm hay Dương:
+  const cashDifference = handedOverCash - targetStandard;
 
   const handleCloseShift = (e: React.FormEvent) => {
     e.preventDefault();
@@ -242,37 +246,23 @@ export function PhotoboothShiftView({ shifts: initialShifts }: PhotoboothShiftVi
               </div>
             </div>
 
-            {/* Cash Handover */}
-            <div className="p-4 rounded-2xl bg-miso-subtle border border-miso-light/70 space-y-3">
-              <div className="text-xs font-bold text-miso-dark uppercase tracking-wider">
-                Bàn Giao Tiền Mặt Cuối Ca
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-                <div>
-                  <span className="text-miso-secondary text-[11px]">Tiền quỹ đầu ca:</span>
-                  <div className="font-bold text-miso-dark mt-0.5">{initialCash.toLocaleString('vi-VN')} đ</div>
-                </div>
-                <div>
-                  <span className="text-miso-secondary text-[11px]">Cần bàn giao:</span>
-                  <div className="font-bold text-miso-primary mt-0.5">{expectedCash.toLocaleString('vi-VN')} đ</div>
-                </div>
-                <div>
-                  <span className="text-miso-secondary text-[11px]">Tiền thực tế bàn giao:</span>
-                  <input
-                    type="number"
-                    value={handedOverCash}
-                    onChange={(e) => setHandedOverCash(Number(e.target.value))}
-                    className="w-full text-xs font-extrabold text-emerald-700 bg-white rounded-lg px-2 py-1 border border-miso-light focus:outline-none focus:ring-1 focus:ring-miso-accent mt-0.5"
-                  />
-                </div>
-              </div>
-              {cashDifference !== 0 && (
-                <div className={`p-2 rounded-lg text-xs font-bold flex items-center gap-1.5 ${cashDifference > 0 ? 'bg-blue-50 text-blue-700' : 'bg-rose-50 text-rose-700'}`}>
-                  <AlertTriangle className="w-3.5 h-3.5" />
-                  <span>Chênh lệch: {cashDifference > 0 ? `Thừa +${cashDifference.toLocaleString('vi-VN')} đ` : `Thiếu ${cashDifference.toLocaleString('vi-VN')} đ`}</span>
-                </div>
-              )}
-            </div>
+            {/* Cash Handover Reconciliation: Công thức Tiền mặt + Tiền số dư - Tiền cốt rồi so sánh với Tiền nhân viên giữ */}
+            <CashReconcileCalculator
+              title="Đối Soát Tiền Ca Photobooth (Âm / Dương)"
+              subtitle="Công thức: Tiền mặt + Tiền số dư - Tiền cốt đầu ca rồi so sánh với Tiền nhân viên giữ"
+              initialValues={{
+                cashAmount: cashRevenue,
+                balanceAmount: transferRevenue,
+                baseAmount: initialCash,
+                staffHeldAmount: handedOverCash,
+              }}
+              onChange={({ data }) => {
+                setCashRevenue(data.cashAmount);
+                setTransferRevenue(data.balanceAmount);
+                setInitialCash(data.baseAmount);
+                setHandedOverCash(data.staffHeldAmount);
+              }}
+            />
 
             {/* Notes & Submit */}
             <div>

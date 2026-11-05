@@ -12,6 +12,7 @@ import { WeeklyStatsView } from '@/components/dashboard/WeeklyStatsView';
 import { BookingListView } from '@/components/dashboard/BookingListView';
 import { MusicboxShiftView } from '@/components/dashboard/MusicboxShiftView';
 import { PhotoboothShiftView } from '@/components/dashboard/PhotoboothShiftView';
+import { CashReconcileCalculator } from '@/components/dashboard/CashReconcileCalculator';
 import {
   BarChart3,
   ClipboardList,
@@ -21,9 +22,10 @@ import {
   Sparkles,
   Shield,
   Layers,
+  Calculator,
 } from 'lucide-react';
 
-type TabType = 'weekly' | 'bookings' | 'musicbox' | 'photobooth';
+type TabType = 'weekly' | 'bookings' | 'musicbox' | 'photobooth' | 'calculator';
 
 export default function DashboardPage() {
   const [activeTab, setActiveTab] = useState<TabType>('weekly');
@@ -64,6 +66,12 @@ export default function DashboardPage() {
       label: 'Kết Ca Photobooth',
       icon: Camera,
       desc: 'Chốt lượt chụp & giấy in ảnh',
+    },
+    {
+      id: 'calculator' as TabType,
+      label: 'Đối Soát Ca (Âm / Dương)',
+      icon: Calculator,
+      desc: 'Công thức: Tiền mặt + Số dư - Tiền cốt',
     },
   ];
 
@@ -151,6 +159,40 @@ export default function DashboardPage() {
           {activeTab === 'bookings' && <BookingListView bookings={initialBookings} />}
           {activeTab === 'musicbox' && <MusicboxShiftView shifts={initialMusicboxShifts} />}
           {activeTab === 'photobooth' && <PhotoboothShiftView shifts={initialPhotoboothShifts} />}
+          {activeTab === 'calculator' && (
+            <div className="space-y-6">
+              <CashReconcileCalculator
+                title="Máy Tính Đối Soát Ca Siêu Tốc (Âm / Dương)"
+                subtitle="Nhập 4 chỉ số để tự động so sánh số tiền nhân viên đang giữ xem bị Âm hay Dương"
+              />
+              <div className="bg-white rounded-3xl p-6 border border-miso-light/70 shadow-xs space-y-3">
+                <h4 className="font-serif text-base font-bold text-miso-dark flex items-center gap-2">
+                  <Calculator className="w-4 h-4 text-miso-primary" />
+                  <span>Quy Tắc Đối Soát Ca Chuẩn MISO</span>
+                </h4>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                  <div className="p-3.5 rounded-2xl bg-amber-50/70 border border-amber-200">
+                    <div className="font-bold text-amber-900 mb-1">1. Xác định số tiền ca</div>
+                    <p className="text-miso-secondary text-[11px] leading-relaxed">
+                      Lấy tổng <strong>Tiền mặt thu</strong> cộng với <strong>Tiền số dư (chuyển khoản QR ngân hàng)</strong>.
+                    </p>
+                  </div>
+                  <div className="p-3.5 rounded-2xl bg-rose-50/70 border border-rose-200">
+                    <div className="font-bold text-rose-900 mb-1">2. Trừ tiền cốt đầu ca</div>
+                    <p className="text-miso-secondary text-[11px] leading-relaxed">
+                      Trừ đi <strong>Tiền cốt đầu ca</strong> (khoản vốn lẻ giao lúc nhận ca) để ra doanh thu chuẩn cần nộp.
+                    </p>
+                  </div>
+                  <div className="p-3.5 rounded-2xl bg-emerald-50/70 border border-emerald-200">
+                    <div className="font-bold text-emerald-900 mb-1">3. So sánh với NV giữ</div>
+                    <p className="text-miso-secondary text-[11px] leading-relaxed">
+                      So sánh với <strong>Tiền nhân viên thực tế giữ</strong>: lớn hơn là <strong>DƯƠNG (+)</strong> (thừa tiền), nhỏ hơn là <strong>ÂM (-)</strong> (thiếu hụt quỹ).
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </main>
     </div>
