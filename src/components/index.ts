@@ -11,3 +11,8 @@ export * from './BookingModal';
 export * from './BookingForm';
 export * from './BookingSuccess';
 export * from './Footer';
+export * from './dashboard/WeeklyStatsView';
+export * from './dashboard/BookingListView';
+export * from './dashboard/MusicboxShiftView';
+export * from './dashboard/PhotoboothShiftView';
+

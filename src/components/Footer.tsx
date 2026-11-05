@@ -30,11 +30,12 @@ export function Footer() {
               Khám Phá
             </h4>
             <ul className="space-y-2 text-xs text-white/75">
-              <li><a href="#home" className="hover:text-white transition-colors">Trang chủ</a></li>
-              <li><a href="#promotions" className="hover:text-white transition-colors">Combo ưu đãi</a></li>
-              <li><a href="#rooms" className="hover:text-white transition-colors">Hệ thống phòng hát</a></li>
-              <li><a href="#photobooth" className="hover:text-white transition-colors">Photobooth chuẩn Hàn</a></li>
-              <li><a href="#pricing" className="hover:text-white transition-colors">Bảng giá niêm yết</a></li>
+              <li><a href="/#home" className="hover:text-white transition-colors">Trang chủ</a></li>
+              <li><a href="/#promotions" className="hover:text-white transition-colors">Combo ưu đãi</a></li>
+              <li><a href="/#rooms" className="hover:text-white transition-colors">Hệ thống phòng hát</a></li>
+              <li><a href="/#photobooth" className="hover:text-white transition-colors">Photobooth chuẩn Hàn</a></li>
+              <li><a href="/#pricing" className="hover:text-white transition-colors">Bảng giá niêm yết</a></li>
+              <li><a href="/dashboard" className="text-miso-accent-light hover:text-white font-semibold transition-colors flex items-center gap-1">📊 Quản trị & Báo cáo ca</a></li>
             </ul>
           </div>
 

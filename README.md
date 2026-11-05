@@ -11,6 +11,10 @@
 
 ## ✨ Điểm Nổi Bật (Features)
 
+- **📊 Dashboard Thống Kê Đặt Chỗ Theo Tuần**: Phân tích biểu đồ cột từ Thứ Hai đến Chủ Nhật, tỷ lệ lấp đầy phòng, tỷ trọng Musicbox vs Photobooth vs Combo.
+- **📋 Quản Lý Đặt Chỗ & Xuất Excel Theo Ngày**: Tra cứu, lọc theo ngày/trạng thái và **xuất file Excel (.csv UTF-8 BOM chuẩn tiếng Việt)** chỉ với 1 click.
+- **🎤 Kết Ca Musicbox Karaoke**: Chốt doanh thu tiền mặt, chuyển khoản QR, đối soát tiền quỹ bàn giao và kiểm kê 12 micro không dây, tablet cảm ứng phòng hát.
+- **📸 Kết Ca Photobooth Hàn Quốc**: Chốt số lượt chụp, dải ảnh bán ra, ảnh thử máy/hỏng, kiểm kê kho giấy in nhiệt DNP và phụ kiện kính mắt, bờm tóc.
 - **🎨 Thiết Kế Boutique Ấm Cúng**: Phối màu Tone Cà Phê & Gỗ Mộc (`#3E2723`, `#5D4037`, `#FAF8F5`), kết hợp font chữ thanh lịch **Playfair Display** & **Plus Jakarta Sans**.
 - **🎤 Hệ Thống Khám Phá Phòng Hát**: Lọc danh mục phòng theo nhóm khách (Tiêu chuẩn 2-4 người, VIP Lounge 5-8 người, Party Suite 8-20 người) cùng thông số âm thanh chi tiết.
 - **📸 Góc Photobooth Hàn Quốc**: Trải nghiệm chụp 4 khung hình, xem trước strip ảnh, phụ kiện độc đáo, in ảnh 15s & quét mã QR tải video hậu trường.
