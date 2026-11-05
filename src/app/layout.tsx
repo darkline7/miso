@@ -38,11 +38,16 @@ export default function RootLayout({
     <html
       lang="vi"
       className={`${playfair.variable} ${jakarta.variable} scroll-smooth`}
+      suppressHydrationWarning
     >
-      <body className="min-h-screen flex flex-col font-sans bg-miso-bg text-miso-dark antialiased selection:bg-miso-accent-light selection:text-miso-dark">
+      <body
+        className="min-h-screen flex flex-col font-sans bg-miso-bg text-miso-dark antialiased selection:bg-miso-accent-light selection:text-miso-dark"
+        suppressHydrationWarning
+      >
         {children}
       </body>
     </html>
   );
 }
+
 
