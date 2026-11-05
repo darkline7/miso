@@ -9,31 +9,39 @@ import { BookingSuccess } from './BookingSuccess';
 interface BookingModalProps {
   isOpen: boolean;
   onClose: () => void;
-  initialRoomCode?: string;
+  initialGuests?: number;
   initialHours?: number;
+  initialRoomCode?: string; // backwards compatibility
 }
 
 export function BookingModal({
   isOpen,
   onClose,
-  initialRoomCode,
+  initialGuests,
   initialHours = 2,
+  initialRoomCode,
 }: BookingModalProps) {
   const [step, setStep] = useState<'form' | 'success'>('form');
   const [bookingCode, setBookingCode] = useState('');
   const [fullName, setFullName] = useState('');
   const [phone, setPhone] = useState('');
-  const [selectedRoom, setSelectedRoom] = useState(initialRoomCode || '201');
   const [date, setDate] = useState('');
   const [time, setTime] = useState('18:00');
-  const [guests, setGuests] = useState(4);
+  const [guests, setGuests] = useState(initialGuests || 4);
   const [hours, setHours] = useState(initialHours);
   const [includeBooth, setIncludeBooth] = useState(true);
+  const [note, setNote] = useState('');
 
   useEffect(() => {
-    if (initialRoomCode) setSelectedRoom(initialRoomCode);
+    if (initialGuests) {
+      setGuests(initialGuests);
+    } else if (initialRoomCode) {
+      // Map legacy room code to default capacity
+      const legacyMap: Record<string, number> = { '201': 4, '202': 4, '203': 6, '204': 6, '205': 12, '206': 12 };
+      setGuests(legacyMap[initialRoomCode] || 4);
+    }
     if (initialHours) setHours(initialHours);
-  }, [initialRoomCode, initialHours]);
+  }, [initialGuests, initialRoomCode, initialHours]);
 
   useEffect(() => {
     setDate(new Date().toISOString().split('T')[0]);
@@ -71,12 +79,14 @@ export function BookingModal({
           <div className="p-6 sm:p-8 max-h-[90vh] overflow-y-auto">
             <div className="mb-5">
               <span className="text-[11px] font-bold uppercase tracking-wider text-miso-secondary">
-                Đặt Lịch Trực Tuyến
+                Đặt Slot Trực Tuyến
               </span>
               <h3 className="font-serif text-2xl font-bold text-miso-dark mt-1">
-                Đặt Phòng Hát & Photobooth
+                Đặt Slot Hát & Photobooth
               </h3>
-              <p className="text-xs text-miso-dark/70 mt-1">Giữ chỗ không cần cọc trước.</p>
+              <p className="text-xs text-miso-dark/70 mt-1">
+                Giữ chỗ không cần cọc • Quán tự động sắp xếp căn phòng phù hợp theo số người.
+              </p>
             </div>
 
             <BookingForm
@@ -84,8 +94,6 @@ export function BookingModal({
               setFullName={setFullName}
               phone={phone}
               setPhone={setPhone}
-              selectedRoom={selectedRoom}
-              setSelectedRoom={setSelectedRoom}
               date={date}
               setDate={setDate}
               time={time}
@@ -96,6 +104,8 @@ export function BookingModal({
               setHours={setHours}
               includeBooth={includeBooth}
               setIncludeBooth={setIncludeBooth}
+              note={note}
+              setNote={setNote}
               onSubmit={handleSubmit}
             />
           </div>
@@ -106,8 +116,10 @@ export function BookingModal({
             phone={phone}
             date={date}
             time={time}
-            roomCode={selectedRoom}
+            guests={guests}
             hours={hours}
+            includeBooth={includeBooth}
+            note={note}
             onClose={handleReset}
           />
         )}

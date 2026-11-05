@@ -65,8 +65,8 @@ export const REVIEWS: Review[] = [
 
 export const FAQS: FaqItem[] = [
   {
-    question: 'Tôi có cần đặt phòng trước khi đến không?',
-    answer: 'Để đảm bảo có phòng trống theo đúng khung giờ và phong cách bạn yêu thích (đặc biệt vào buổi tối và các ngày cuối tuần), MISO khuyến khích bạn nên đặt lịch trước ít nhất 2 - 4 tiếng qua website hoặc hotline 1900 6476.',
+    question: 'Tôi có cần chọn số phòng trước khi đặt không?',
+    answer: 'Không cần! Quý khách chỉ cần đặt slot trước bằng cách chọn khung giờ đến và số lượng người đi cùng. MISO sẽ tự động bố trí và sắp xếp căn phòng phù hợp, thoải mái nhất cho đoàn của bạn.',
   },
   {
     question: 'MISO có cho phép mang đồ ăn thức uống từ ngoài vào không?',

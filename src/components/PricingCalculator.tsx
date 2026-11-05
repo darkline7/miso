@@ -67,16 +67,16 @@ export function PricingCalculator({ onOpenBookingWithPlan }: Props) {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
             <div>
-              <label className="text-xs text-white/80 block mb-1">Hạng phòng</label>
+              <label className="text-xs text-white/80 block mb-1">Quy mô đoàn (Hạng phòng dự kiến)</label>
               <select
                 value={calcRoom}
                 onChange={(e) => setCalcRoom(e.target.value as any)}
-                aria-label="Hạng phòng"
+                aria-label="Quy mô đoàn"
                 className="w-full bg-white/10 border border-white/20 rounded-xl px-3 py-2 text-xs text-white"
               >
-                <option value="standard" className="text-black">Tiêu Chuẩn (99k/h)</option>
-                <option value="vip" className="text-black">VIP Lounge (149k/h)</option>
-                <option value="party" className="text-black">Party Suite (219k/h)</option>
+                <option value="standard" className="text-black">Tiêu Chuẩn (2-4 người • 99k/h)</option>
+                <option value="vip" className="text-black">VIP Lounge (5-8 người • 149k/h)</option>
+                <option value="party" className="text-black">Party Suite (9-20 người • 219k/h)</option>
               </select>
             </div>
             <div>
@@ -114,7 +114,7 @@ export function PricingCalculator({ onOpenBookingWithPlan }: Props) {
               onClick={() => onOpenBookingWithPlan?.({ roomType: calcRoom, hours: calcHours })}
               className="inline-flex items-center gap-2 bg-miso-accent text-miso-dark font-bold text-xs px-5 py-3 rounded-full hover:bg-white cursor-pointer"
             >
-              <span>Đặt theo ước tính này</span>
+              <span>Đặt giữ slot theo mức này</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </div>

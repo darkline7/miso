@@ -35,7 +35,7 @@ export function Footer() {
               <li><a href="/#rooms" className="hover:text-white transition-colors">Hệ thống phòng hát</a></li>
               <li><a href="/#photobooth" className="hover:text-white transition-colors">Photobooth chuẩn Hàn</a></li>
               <li><a href="/#pricing" className="hover:text-white transition-colors">Bảng giá niêm yết</a></li>
-              <li><a href="/dashboard" className="text-miso-accent-light hover:text-white font-semibold transition-colors flex items-center gap-1">📊 Quản trị & Báo cáo ca</a></li>
+              <li><a href="/dashboard" className="text-white/40 hover:text-white transition-colors flex items-center gap-1 text-[11px] pt-1">🔒 Nhân viên nội bộ (Kết ca)</a></li>
             </ul>
           </div>
 

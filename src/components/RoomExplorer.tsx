@@ -35,7 +35,7 @@ export function RoomExplorer({ onSelectRoom }: RoomExplorerProps) {
             Khám Phá Các Phòng Hát MISO
           </h2>
           <p className="text-sm md:text-base text-miso-dark/70">
-            Mỗi phòng tại MISO là một phong cách độc đáo, cách âm tuyệt đối và trang bị hệ thống âm thanh tiêu chuẩn phòng thu.
+            Không gian tinh tế, cách âm phòng thu. Quý khách chỉ cần đặt slot trước và báo số lượng người, MISO sẽ tự sắp xếp căn phòng tối ưu nhất cho bạn!
           </p>
         </div>
 
@@ -108,7 +108,7 @@ export function RoomExplorer({ onSelectRoom }: RoomExplorerProps) {
                     onClick={() => onSelectRoom(room)}
                     className="flex items-center gap-1.5 bg-miso-primary text-white text-xs font-semibold px-4 py-2.5 rounded-full hover:bg-miso-dark transition-colors cursor-pointer"
                   >
-                    <span>Chọn phòng</span>
+                    <span>Đặt Giữ Slot</span>
                     <ArrowRight className="w-3 h-3" />
                   </button>
                 </div>

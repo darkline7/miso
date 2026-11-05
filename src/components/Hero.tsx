@@ -37,7 +37,7 @@ export function Hero({ onOpenBooking }: HeroProps) {
                 className="inline-flex items-center justify-center gap-2 bg-miso-primary text-white font-semibold px-7 py-3.5 rounded-full hover:bg-miso-dark active:scale-[0.98] transition-all shadow-md cursor-pointer"
               >
                 <Calendar className="w-4 h-4 text-miso-accent-light" />
-                <span>Đặt Phòng Trải Nghiệm</span>
+                <span>Đặt Slot Giữ Chỗ</span>
                 <ArrowRight className="w-4 h-4 ml-1" />
               </button>
 

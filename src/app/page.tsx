@@ -18,43 +18,45 @@ import { Room } from '@/types';
 
 export default function Home() {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
-  const [selectedRoomCode, setSelectedRoomCode] = useState<string>('201');
+  const [bookingGuests, setBookingGuests] = useState<number>(4);
   const [bookingHours, setBookingHours] = useState<number>(2);
 
-  const handleOpenBooking = (roomCode?: string, hours?: number) => {
-    if (roomCode) setSelectedRoomCode(roomCode);
-    if (hours) setBookingHours(hours);
+  const handleOpenBooking = (guests: number = 4, hours: number = 2) => {
+    setBookingGuests(guests);
+    setBookingHours(hours);
     setIsBookingOpen(true);
   };
 
   const handleSelectRoom = (room: Room) => {
-    handleOpenBooking(room.code);
+    // Pass recommended guest capacity so modal pre-selects the right group size
+    const guestCount = room.category === 'party' ? 12 : room.category === 'vip' ? 6 : 4;
+    handleOpenBooking(guestCount, 2);
   };
 
   const handleSelectPromo = (promoId: string) => {
     if (promoId === 'birthday-combo') {
-      handleOpenBooking('205', 3);
+      handleOpenBooking(10, 3);
     } else if (promoId === 'happy-hour') {
-      handleOpenBooking('201', 2);
+      handleOpenBooking(4, 2);
     } else {
-      handleOpenBooking('203', 2);
+      handleOpenBooking(4, 2);
     }
   };
 
   const handlePlanBooking = (plan: { roomType: string; hours: number }) => {
-    const code = plan.roomType === 'vip' ? '203' : plan.roomType === 'party' ? '205' : '201';
-    handleOpenBooking(code, plan.hours);
+    const guestCount = plan.roomType === 'party' ? 12 : plan.roomType === 'vip' ? 6 : 4;
+    handleOpenBooking(guestCount, plan.hours);
   };
 
   return (
     <div className="flex min-h-screen flex-col bg-miso-bg text-miso-dark">
-      <Navbar onOpenBooking={() => handleOpenBooking()} />
+      <Navbar onOpenBooking={() => handleOpenBooking(4, 2)} />
 
       <main className="flex-1">
-        <Hero onOpenBooking={() => handleOpenBooking()} />
+        <Hero onOpenBooking={() => handleOpenBooking(4, 2)} />
         <Promotions onSelectPromo={handleSelectPromo} />
         <RoomExplorer onSelectRoom={handleSelectRoom} />
-        <PhotoboothSection onOpenBooking={() => handleOpenBooking('203', 2)} />
+        <PhotoboothSection onOpenBooking={() => handleOpenBooking(2, 2)} />
         <PricingCalculator onOpenBookingWithPlan={handlePlanBooking} />
         <Testimonials />
         <FaqSection />
@@ -66,7 +68,7 @@ export default function Home() {
       <BookingModal
         isOpen={isBookingOpen}
         onClose={() => setIsBookingOpen(false)}
-        initialRoomCode={selectedRoomCode}
+        initialGuests={bookingGuests}
         initialHours={bookingHours}
       />
     </div>
